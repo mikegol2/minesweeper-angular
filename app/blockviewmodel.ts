@@ -3,6 +3,7 @@ export class BlockViewModel {
     Col: number;
     IsOpen : boolean;
     CountMinesAround: number;
+    BlownMine: boolean;
 }
 
 export class RowOfBlocksViewModel {

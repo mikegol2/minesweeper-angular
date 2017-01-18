@@ -1,0 +1,13 @@
+<h2>The Minesweeper Field</h2>
+
+<p>
+    Field size: {{field.Size}}  |  Mines: {{field.NumberOfMines}}  |  Number of blocks left to open {{gameStatus.NumberOfBlocksToOpen}}
+</p>
+
+<table>
+    <tr *ngFor="let row of buildRowsOfBlocks();">
+    <th *ngFor="let block of row.Blocks">
+        <minesweeper-block [block]="block" (click)="onClick(block)"></minesweeper-block>
+    </th>
+    </tr>
+</table>    

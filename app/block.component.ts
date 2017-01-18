@@ -4,8 +4,8 @@ import {BlockViewModel} from './blockviewmodel';
 @Component({
   selector: 'minesweeper-block',
   template: `
-    <div class='block' [class.opened]="block.IsOpen == true" [class.closed]="block.IsOpen == false">
-      <span style="vertical-align">X</span>
+    <div style="text-align:center" class='block' [class.opened]="block.IsOpen == true" [class.closed]="block.IsOpen == false">
+      {{getText()}}
     </div>`,
     styles: [`
     .block {
@@ -33,4 +33,10 @@ export class BlockComponent
 {
   @Input()
   block: BlockViewModel;
+
+  getText() : string {
+    if (this.block.IsOpen == false)
+      return "?";
+    return this.block.CountMinesAround.toString();
+  }
 }

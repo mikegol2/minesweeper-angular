@@ -1,0 +1,17 @@
+<div class="container">
+    <h2>New Game</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="size">Board size (# of columns)</label>
+        <input type="number" class="form-control" id="size" required>
+      </div>
+      <p>hey {{model.size}} </p>
+      <div class="form-group">
+        <label for="numberOfMines">Number of mines</label>
+        <input type="number" class="form-control" id="numberOfMines">
+      </div>
+
+      <button type="submit" class="btn btn-default">Submit</button>
+      <a href="/game">Cancel</a>
+    </form>
+</div>

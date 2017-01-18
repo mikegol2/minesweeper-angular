@@ -3,20 +3,9 @@ import { Field, GameStatus } from './field';
 import { BlockViewModel, RowOfBlocksViewModel } from './blockviewmodel';
 
 @Component({
+  moduleId: module.id,
   selector: 'minesweeper-field',
-  template: `
-    <h2>The Minesweeper Field</h2>
-
-    <table>
-      <tr *ngFor="let row of buildRowsOfBlocks();">
-        <th *ngFor="let block of row.Blocks">
-          <minesweeper-block [block]="block" (click)="onClick(block)"></minesweeper-block>
-        </th>
-      </tr>
-    </table>    
-
-    <p>end of table</p>
-  `,
+  templateUrl: 'field.component.html'
 })
 export class FieldComponent
 {
@@ -25,17 +14,24 @@ export class FieldComponent
   }
 
   field: Field;
+  gameStatus: GameStatus;
 
   init(size: number, numberOfMines: number):void {
     this.field = new Field();
     this.field.Init(size, numberOfMines);
+    this.gameStatus = this.field.CheckGameStatus();
   }
 
   onClick(block: BlockViewModel) {
+    if (this.gameStatus.Lost || this.gameStatus.Won)
+      return;
 
     this.field.OpenOneBlock(block.Row, block.Col);
-    let gameStatus = this.field.CheckGameStatus();
+    this.gameStatus = this.field.CheckGameStatus();
     this.updateBlockViewModel(block);
+    if (this.gameStatus.Lost) {
+      alert('You lost!');
+    }
 
   }
 
